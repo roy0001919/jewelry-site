@@ -1,0 +1,30 @@
+{% extends "myweb/base2.html" %}
+
+{% block content %}
+<div class='content' align=left><br/>
+    <h1>分類: Gemstones 挑寶石</h1><br/>
+    {% for jewelry in jewelries %}
+    <div class='jewelry' align=center>
+        <img src="/static/images/{{ jewelry.image }}" height="200" width="300"/>&nbsp&nbsp&nbsp<br/>
+            <h2>
+                <font color="orange">{{ jewelry.name }}</font>
+            </h2>
+            <p>
+                &nbsp長:{{ jewelry.length }}
+                &nbsp寬:{{ jewelry.width }}
+                &nbsp厚:{{ jewelry.thickness }}<br/>
+                &nbsp重量:{{ jewelry.weight }}
+            </p>
+    </div>
+    {% endfor %}
+</div>
+<style>
+    .content{
+      margin:0px 120px 0px 180px;
+    }
+    .jewelry{
+      display: inline-block;
+      text-align: left;
+    }
+</style>
+{% endblock %}

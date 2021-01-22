@@ -1,0 +1,37 @@
+{% extends "myweb/myaccount.html" %}
+
+{% block content2 %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div class="search">
+{% if query %}
+    <h3>搜索結果如下：</h3>
+    {% for result in page.object_list %}
+        <a href="/JiaBlog/article/{{ result.object.id }}/">{{ result.object.name }}</a><br/>
+    {% empty %}
+        <p>很抱歉，找不到符合所需的內容，請換一個關鍵字再次搜尋。</p>
+    {% endfor %}
+
+    {% if page.has_previous or page.has_next %}
+        <div>
+            {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; 上一頁{% if page.has_previous %}</a>{% endif %}
+        |
+            {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}下一頁 &raquo;{% if page.has_next %}</a>{% endif %}
+        </div>
+    {% endif %}
+{% endif %}
+</div>
+</body>
+</html>
+<style>
+    .search{
+        margin:0px 0px 0px 250px;
+        line-height:80px;
+        font-size:25px;
+    }
+</style>
+{% endblock %}

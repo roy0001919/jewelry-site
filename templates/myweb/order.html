@@ -1,0 +1,22 @@
+{% extends "myweb/base3.html" %}
+
+{% block content %}
+<div class='title1' align=center><br/><br/>
+    <h1>Custom Order 訂製方式</h1><br/><br/><br/>
+</div>
+    {% for order in orders %}
+        <div class="content">
+            {{ order.title }}<br/>
+            {{ order.content|linebreaksbr }}
+        </div>
+    {% endfor %}
+<style>
+    .content{
+        margin:0px 250px 0px 250px;
+        line-height: 50px;
+        font-size:25px;
+    }
+</style>
+{% endblock %}
+
+

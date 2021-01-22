@@ -1,0 +1,56 @@
+{% extends "myweb/base3.html" %}
+
+{% block content %}
+<div class='content'>
+    <h1>Contact 聯絡我們</h1><br/>
+</div>
+<div class="contact">
+    {% for contact in contacts %}
+    <img src="/static/images/{{ contact.image }}" height="300" width="1200" /><br/><br/>
+    <h2>客服信箱</h2><br/>
+    {{ contact.serviceEmail }}<br/><br/>
+    <h2>聯絡電話</h2><br/>
+    {{ contact.servicePhone }}<br/><br/>
+    {% endfor %}
+    <h2>Contact Me</h2><br/>
+    <h3>標有 * 為必填欄位</h3><br/>
+    <form>
+      <label for="input">Name *</label><br/>
+      <input type="text" id="input" name="fname" size="162" required><br><br>
+      <label for="input">Email *</label><br/>
+      <input type="email" id="input" name="lname" size="162" required><br><br>
+      <label for="message">Message *</label><br/>
+      <textarea cols="167" rows="10" id="message" name="message" required>
+      </textarea><br><br>
+<!--      <input type="text" id="message" name="message" size="170" required><br><br>-->
+      <input type="submit" value="Submit" class="button">
+    </form>
+</div>
+<style>
+    .content{
+      text-align: center;
+    }
+    .contact{
+      margin:0px 100px 0px 200px;
+      line-height:20px;
+    }
+</style>
+<style type="text/css">
+    .message{
+      height:30px;
+    }
+    #input {
+        line-height: 3em;
+        padding: 0px 0px 0px 20px;
+    }
+    .button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 15px 25px;
+      text-align: center;
+      font-size: 16px;
+      cursor: pointer;
+    }
+</style>
+{% endblock %}

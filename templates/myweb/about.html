@@ -1,0 +1,24 @@
+{% extends "myweb/base2.html" %}
+
+{% block content %}
+<div class='content'>
+    <h1>About 關於</h1>
+    {% for about in abouts %}
+        <div class='image'>
+            <img src="/static/images/{{ about.image }}" height="500" width="940"/><br/>
+        </div><br/><br/>
+        <div class='about' align=left>
+            <h2>{{ about.title }}</h2>
+            {{ about.content|linebreaksbr }}
+        </div>
+    {% endfor %}
+</div>
+<style>
+    .content{
+      text-align: center;
+    }
+    .about{
+      margin:0px 385px 0px 385px;
+    }
+</style>
+{% endblock %}

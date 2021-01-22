@@ -1,0 +1,49 @@
+{% extends "myweb/myaccount_base.html" %}
+
+{% block title %}Log-in{% endblock %}
+
+{% block content2 %}
+<style type="text/css">
+    .login,.register{
+        display: inline-block;
+        margin: 0px 40px 0px 0px;
+        border: 1px solid white;
+        width:400px;
+        padding: 20px 20px 20px 20px;
+        line-height:50px;
+        font-size:20px;
+        border-radius:5px;
+        vertical-align:top;
+    }
+    #input {
+        line-height: 3em;
+        padding: 0px 0px 0px 20px;
+    }
+</style>
+    <h1 align="center">My Account 我的帳號</h1><br/><br/><br/>
+    <h2>登入&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp註冊</h2><br/><br/>
+<div class="login">
+    <form action="." method="post">
+        {{ form.as_p }}
+<!--        <p>使用者名稱 或 電子郵件 *</p>-->
+<!--        <input type="input" id="input" size="50"/><br/>-->
+<!--        <p>密碼 *</p>-->
+<!--        <input type="input" id="input" size="50"/><br/><br/>-->
+        {% csrf_token %}
+        <p><input type="submit" class="button" value="登入"></p>
+    </form>
+</div>
+<div class="register">
+    <form action="/jewelry/myaccount/register/" method="post">
+        {{ user_form.as_p }}
+<!--        <p>電子郵件 *</p>-->
+<!--        <input type="input" id="input" size="50"/><br/>-->
+<!--        <p>密碼 *</p>-->
+<!--        <input type="input" id="input" size="50"/><br/><br/>-->
+        {% csrf_token %}
+        <p><input type="submit" class="button" value="註冊"></p>
+    </form>
+</div>
+{% endblock %}

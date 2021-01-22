@@ -1,0 +1,26 @@
+{% extends "myweb/base3.html" %}
+
+{% block content %}
+<div class='title1'>
+    <h1>Q&A 常見問題</h1>
+</div>
+<div class='content'><br/>
+    {% for qa in qas %}
+        <h2><br/>
+            {{ qa.title }}<br/><br/>
+        </h2>
+<!--    <pre style="font-size:18px">{{ qa.content }}</pre>-->
+            {{ qa.content|linebreaksbr }}
+    {% endfor %}
+</div>
+<style>
+    .title1{
+      text-align: center;
+    }
+    .content{
+      margin: 0px 150px 0px 150px;
+      line-height: 40px;
+      font-size:20px;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends "myweb/base2.html" %}
+
+{% block content %}
+<style type="text/css">
+.reverse{
+    transform: scaleX(-1);
+    z-index:-1;
+    position: relative;
+}
+@keyframes bounceInLeft {
+        from, 60%, 75%, 90%, to {animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);}
+        0% {opacity: 0;transform: translate3d(-3000px, 0, 0);}
+        60% {opacity: 1;transform: translate3d(25px, 0, 0);}
+        75% {transform: translate3d(-10px, 0, 0);}
+        90% {transform: translate3d(5px, 0, 0);}
+        100% {opacity: 1;transform: none;}
+    }
+@keyframes bounceInRight {
+        from, 60%, 75%, 90%, to {animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);}
+        0% {opacity: 0;transform: translate3d(3000px, 0, 0);}
+        60% {opacity: 1;transform: translate3d(-25px, 0, 0);}
+        75% {transform: translate3d(10px, 0, 0);}
+        90% {transform: translate3d(-5px, 0, 0);}
+        100% {opacity: 1;transform: none;}
+    }
+.describe2,.describe{
+        width: REM(480);
+        height: REM(206);
+        left: 50%;
+        margin-left: REM(-240);
+        opacity: 0;
+    }
+.describe2,pics2{
+        bottom: REM(548);
+        animation: bounceInLeft 0.7s 0.45s linear forwards;
+    }
+.describe,pics{
+    bottom: REM(314);
+    animation: bounceInRight 0.9s 0.65s linear forwards;
+    vertical-align: text-top;
+}
+    .content{
+      text-align: center;
+    }
+    .describe2{
+      width: 300px;
+      text-align: left;
+      line-height: 20px;
+      margin:100px 0px 0px 0px;
+    }
+
+    .describe{
+      width: 300px;
+      text-align: left;
+      line-height: 20px;
+      margin:0px 0px 0px 950px;
+      z-index:1;
+    }
+    .pics2,.describe2{
+      display: inline-block;
+      vertical-align: text-top;
+    }
+    .pics,.describe{
+<!--      display: inline-block;-->
+      vertical-align: text-top;
+<!--      border: 1px solid red;-->
+    }
+.pics{ position:relative;margin:0px 1100px 0px 0px;z-index:999;}
+.pics img{ position:absolute;
+  /* 淡出淡入效果2秒 */
+  -webkit-transition: opacity 2s ease-in-out;
+  -moz-transition: opacity 2s ease-in-out;
+  -o-transition: opacity 2s ease-in-out;
+  transition: opacity 2s ease-in-out;
+ }
+ .pics img:last-child:hover{
+     /* 滑入時第一張透明度設0 */
+      opacity:0;}
+
+.pics2{ position:relative;padding:100px 750px 0px 50px;}
+.pics2 img{ position:absolute;
+  /* 淡出淡入效果2秒 */
+  -webkit-transition: opacity 2s ease-in-out;
+  -moz-transition: opacity 2s ease-in-out;
+  -o-transition: opacity 2s ease-in-out;
+  transition: opacity 2s ease-in-out;
+ }
+ .pics2 img:last-child:hover{
+     /* 滑入時第一張透明度設0 */
+      opacity:0;}
+</style>
+
+<div class='content'>
+    <h1>Products成品</h1><br/>
+    {% for production in productions %}
+        <p>
+            {% if production.id == 2 %}
+                <div class="describe2">
+                    <div style= "position:relative ">
+                        <div style= "position:absolute; left:0; top:0; color:#fff; font-weight:bold "> <h2>
+                                {{ production.name }}
+                            </h2><br/>
+                                {{ production.content }}<br/><br/>
+                                {{ production.idea }}<br/><br/><br/><br/><br/><br/>
+                                {{ production.remark|linebreaksbr }}<br/>
+                        </div>
+                        <img src= "/static/images/{{ production.background }}" height="420" width="955">
+                    </div>
+                </div>
+                <div class="pics2">
+                    <img src="/static/images/{{ production.image1 }}" height="400" width="600" alt="滑入顯示的圖片">
+                    <img src="/static/images/{{ production.image2 }}" height="400" width="600" alt="原本顯示的圖片">
+                </div><br/><br/><br/><br/><br/><br/>
+            {% else %}
+                <div class="pics">
+                    <img src="/static/images/{{ production.image1 }}" height="400" width="600" alt="滑入顯示的圖片">
+                    <img src="/static/images/{{ production.image2 }}" height="400" width="600" alt="原本顯示的圖片">
+                </div>
+                <div class="describe">
+                    <div style= "position:relative">
+                        <div style= "position:absolute; left:0; top:0; color:#fff; font-weight:bold ">
+                            <h2>
+                                {{ production.name }}
+                            </h2><br/>
+                                {{ production.content }}<br/><br/>
+                                {{ production.idea }}<br/><br/><br/><br/><br/><br/>
+                                {{ production.remark|linebreaksbr }}<br/>
+                        </div>
+                        <div class="reverse">
+                            <img src= "/static/images/{{ production.background }}" height="420" width="955">
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </p>
+    {% endfor %}
+</div>
+{% endblock %}

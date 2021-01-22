@@ -1,0 +1,8 @@
+{% extends "myweb/myaccount_base.html" %}
+
+{% block title %}Log-in{% endblock %}
+
+{% block content2 %}
+    <h1 align="center">My Account 我的帳號</h1><br/><br/><br/>
+        <button type="button" class="button" onclick="location.href='{% url "jewelry:logout" %}'">登出</button>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "myweb/myaccount.html" %}
+
+
+{% block content2 %}
+<style>
+    #number {
+      width: 3em;
+    }
+    #orangeBox {
+      background: red;
+      color: #fff;
+      font-family: 'Helvetica', 'Arial', sans-serif;
+      font-size: 1.5em;
+      font-weight: bold;
+      text-align: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 30px;
+    }
+    table{
+        border: 5px solid white;
+<!--        border-collapse:collapse;-->
+    }
+    th{
+        padding:20px 40px 20px 40px;
+        font-size:20px;
+        background-color: brown;
+    }
+    td{
+        padding:20px 40px 20px 40px;
+<!--        text-align: center;-->
+<!--        border: 3px solid white;-->
+    }
+    tr:hover {
+        background-color: orange;
+    }
+    .table{
+        padding:0px 100px 0px 0px;
+    }
+</style>
+<h1 align="left">Cart購物車</h1><br/><br/>
+<div class="table" >
+    <table border="1" align="right" width="1000px" style="margin-bottom:50px">
+        <tr>
+            <th></th>
+            <th></th>
+            <th>商品</th>
+            <th>價格</th>
+            <th>數量</th>
+            <th>總計</th>
+        </tr>
+        {% for item in cart %}
+        <tr>
+            <td><a href="{% url "jewelry:remove_from_cart" item.object_id %}"><div id="orangeBox"><span id="x">X</span></div></td>
+            <td><img src="/static/images/{{ item.image }}" height="50" width="50" onerror='this.style.display = "none"'/></td>
+            <td align="center">{{ item.product.name }}</td>
+            <td>NT${{ item.unit_price }}</td>
+            <form name="cart" method="post" action="http://127.0.0.1:8000/jewelry/get_cart/">
+                <td><input type="number" id="number" name="quantity{{ item.object_id }}" value="{{ item.quantity }}"/></td>
+                {% csrf_token %}
+                <td>NT${{ item.total_price }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="6" align="right">
+                {% csrf_token %}
+                <input type="submit" class="button" value="更新購物車"/>
+            </form>
+            </td>
+        </tr>
+    </table>
+    <table border="1" align="right" width="450px">
+
+        <tr>
+            <th>購物車總計</th>
+        </tr>
+        <tr>
+            <td><strong>小計&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                NT${{ total }}</strong></td>
+        </tr>
+        <tr>
+            <td><strong>總計&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                NT${{ total }}</strong></td>
+        </tr>
+    </table>
+</div>
+{% endblock %}

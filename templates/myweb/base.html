@@ -1,0 +1,83 @@
+<html>
+<body>
+    {% block nav %}
+    <div class='menu'>
+        <div class='button'>
+            <a href="#" id="link">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar"
+                        style = "background-color: transparent; border: 0;"/>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </button>
+            </a>
+        </div>
+        <div class='title'>
+            <h1>Stella Luo</h1>
+        </div>
+        <div class='selection'>
+            <div id="thediv" style="display:block">
+                <ul id="nav">
+                    <a href="{% url "jewelry:home" %}">Home</a>
+                    <a href="{% url "jewelry:collection_list" %}">Collection 作品</a>
+                    <a href="{% url "jewelry:production_list" %}">Products 成品</a>
+                    <a href="{% url "jewelry:jewelry_list" %}">Gemstones 挑寶石</a>
+                    <a href="{% url "jewelry:sketch_list" %}">Sketches 設計圖</a>
+                    <a href="{% url "jewelry:about_list" %}">About 關於</a>
+                    <a href="{% url "jewelry:order_list" %}">Custom Order 訂製方式</a>
+                    <a href="{% url "jewelry:qa_list" %}">Q&A 常見問題</a>
+                    <a href="{% url "jewelry:contact_list" %}">Contact 聯絡我們</a>
+                    <a href="{% url "jewelry:myaccount" %}">My Account 我的帳號</a>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <style>
+        .bar {
+          width: 30px;
+          height: 5px;
+          background-color: black;
+          margin: 6px 0;
+        }
+        .menu,.title{
+          text-align: center
+        }
+        .button,.title{
+          display: inline-block;
+          vertical-align: middle;
+        }
+        .button{
+          float:left;
+        }
+        .menu{
+          margin:50px 200px 100px 200px;
+        }
+    </style>
+    <script type="text/javascript">
+        function Show_Hidden(obj)
+        {
+        if(obj.style.display=="block")
+        {
+        obj.style.display='none';
+        }
+        else
+        {
+        obj.style.display='block';
+        }
+        }
+        window.onload=function()
+        {
+        var olink=document.getElementById("link");
+        var odiv=document.getElementById("thediv");
+        olink.onclick=function()
+        {
+        Show_Hidden(odiv);
+        return false;
+        }
+        }
+    </script>
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

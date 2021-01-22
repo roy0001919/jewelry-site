@@ -1,0 +1,59 @@
+{% extends "myweb/myaccount_base.html" %}
+
+
+{% block content2 %}
+<!--<div class="clothes">-->
+<h1 align="left">Hoodies
+<button type="button" class="button2" onclick="location.href='{% url "jewelry:get_cart" %}'"><img src="http://www.ipotato.tw/Image/shopping-cart.png" height="30" width="30">查看購物車</button>
+</h1>
+<div class="form">
+        <form name="orderby" method="get">
+            <select name="orderby">
+                <option value="price">price</option>
+                <option value="price-desc">price-desc</option>
+            </select>
+            <input type="submit" value="送出">
+        </form>
+    </div><br/><br/><br/>
+<!--    <div class="form">-->
+<!--        <form name="orderby" method="get">-->
+<!--            <select name="orderby">-->
+<!--                <option value="price">price</option>-->
+<!--                <option value="price-desc">price-desc</option>-->
+<!--            </select>-->
+<!--            <input type="submit" value="送出">-->
+<!--        </form>-->
+<!--    </div><br/><br/><br/>-->
+
+<!--    {% for good in goods %}-->
+<!--    <div class="clothe">-->
+<!--        <img src="/static/images/{{ good.image }}" height="280" width="300" onerror='this.style.display = "none"'/><br/>-->
+<!--        <strong>{{ good.name }}</strong><br/>-->
+<!--        {% if good.originalPrice != 0 %}-->
+<!--        <del>NT${{ good.originalPrice }}<br/></del>-->
+<!--            NT${{ good.price }}<br/>-->
+<!--        {% else %}-->
+<!--            NT${{ good.price }}<br/>-->
+<!--        {% endif %}-->
+<!--        <button>加入購物車</button>-->
+<!--    </div>-->
+<!--    {% endfor %}-->
+<!--</div>-->
+<!--<style>-->
+<!--    .clothe{-->
+<!--      margin:0px 35px 0px 0px;-->
+<!--      display: inline-block;-->
+<!--      text-align: center;-->
+<!--      line-height:30px;-->
+<!--      vertical-align: text-top;-->
+<!--    }-->
+<!--    .clothes{-->
+<!--      margin:0px 400px 0px 220px;-->
+<!--&lt;!&ndash;      text-align: center;&ndash;&gt;-->
+<!--    }-->
+<!--    .form {-->
+<!--      float:right;-->
+<!--      margin:0px 50px 0px 0px;-->
+<!--    }-->
+<!--</style>-->
+{% endblock %}

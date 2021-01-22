@@ -1,0 +1,110 @@
+{% extends "myweb/base2.html" %}
+
+{% block content %}
+<!--<select>-->
+<!--    <div class="col-lg-12" style="margin-bottom: 20px;">-->
+<!--        <option><a class="{% if type == '' %}btn btn-danger{% else %}btn btn-default{% endif %}" href="?type=" role="button">全部</a></option>-->
+<!--        <option><a class="{% if type == 'fl' %}btn btn-danger{% else %}btn btn-default{% endif %}" href="?type=fl" role="button">法律</a></option>-->
+<!--        <option><a class="{% if type == 'xzfg' %}btn btn-danger{% else %}btn btn-default{% endif %}" href="?type=xzfg" role="button">行政法规</a></option>-->
+<!--        <option><a class="{% if type == 'bmgz' %}btn btn-danger{% else %}btn btn-default{% endif %}" href="?type=bmgz" role="button">部门规章</a></option>-->
+<!--        <option><a class="{% if type == 'dfgz' %}btn btn-danger{% else %}btn btn-default{% endif %}" href="?type=dfgz" role="button">地方规章</a></option>-->
+<!--    </div>-->
+<!--</select>-->
+
+<!--<form name="orderby" method="get" action="http://127.0.0.1:8000/jewelry/clothing/">-->
+<!--    <select name="orderby">-->
+<!--        <option value="price">price</option>-->
+<!--    </select>-->
+<!--    <input type="submit" value="送出">-->
+<!--</form>-->
+<div class="myaccount3">
+    <h3 align="right">CATEGORIES</h3>
+    <div class='content'>
+        <a href="{% url "jewelry:clothing_list" %}">Clothing</a><br/>
+        <a href="{% url "jewelry:hoodies_list" %}">Hoodies</a><br/>
+        <a href="{% url "jewelry:Tshirts_list" %}">T-shirts</a><br/>
+        <a href="{% url "jewelry:music_list" %}">Music</a><br/>
+        <a href="{% url "jewelry:posters_list" %}">Posters</a><br/><br/>
+        <form method='get' action="/search/">
+            <input type="text" name="q">
+            <input type="submit" value="查詢">
+        </form>
+    </div>
+</div>
+<style type="text/css">
+.button2 {
+  background-color: purple;
+  border: none;
+  color: white;
+  padding: 5px 5px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+    .myaccount3{
+      padding:50px 0px 0px 0px;
+<!--      border: 1px solid red;-->
+      width:500px;
+      float:right;
+    }
+    .content{
+      float:right;
+      margin:0px 200px 0px 0px;
+      line-height: 40px;
+    }
+    h3{
+      margin:0px 200px 0px 0px;
+    }
+</style>
+<div class="clothes">
+    <br/>
+{% block content2 %}
+{% endblock %}
+
+
+    {% for good in goods %}
+    <div class="clothe">
+        <img src="/static/images/{{ good.image }}" height="280" width="300" onerror='this.style.display = "none"'/><br/>
+        <strong>{{ good.name }}</strong><br/>
+        {% if good.originalPrice != 0 %}
+        <del><font color="gray">NT${{ good.originalPrice }}</font></del><br/>
+            NT${{ good.price }}<br/>
+        {% else %}
+            NT${{ good.price }}<br/>
+        {% endif %}
+        <button type="button" class="button" onclick="location.href='{% url "jewelry:add_to_cart" good.id 1 %}';window.alert('該品項已加入購物車')">加入購物車</button><br/><br/>
+<!--        <button type="button" class="button" onclick="location.href='{% url "jewelry:remove_from_cart" good.id %}'">刪除該品項</button><br/><br/>-->
+<!--        <form name="cart" method="get" action="http://127.0.0.1:8000/jewelry/cart/">-->
+<!--            <input type="submit" class="button" value="加入購物車"/><br/><br/>-->
+<!--        </form>-->
+    </div>
+    {% endfor %}
+</div>
+<style>
+    .clothe{
+      margin:0px 35px 0px 0px;
+      display: inline-block;
+      text-align: center;
+      line-height:30px;
+      vertical-align: text-top;
+    }
+    .clothes{
+      margin:0px 400px 0px 220px;
+<!--      text-align: center;-->
+    }
+    .form {
+      float:right;
+      margin:0px 50px 0px 0px;
+    }
+</style>
+{% endblock %}
+

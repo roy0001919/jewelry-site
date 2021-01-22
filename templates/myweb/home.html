@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<Style type='text/css' >body{background-color:rgb(0,0,0);background-image:url(http://www.zingerbugimages.com/backgrounds/purple_starry_sky_glitter_background_seamless.gif);background-position:top left;background-repeat:repeat;background-attachment:fixed;}</Style>-->
+<style type="text/css">
+.large-header {
+   position: absolute;
+<!--   width: 100%;-->
+<!--   background: #111;-->
+<!--   overflow: hidden;-->
+<!--   background-size: cover;-->
+<!--   background-position: center center;-->
+   z-index: 1;
+}
+@import url(https://fonts.googleapis.com/css?family=Calligraffitti);
+
+.container {
+  background-image: url("http://www.zingerbugimages.com/backgrounds/pink_starry_sky_glitter_background_seamless.gif");
+<!--  background-image:url(http://www.zingerbugimages.com/backgrounds/colorful_starry_sky_glitter_background_seamless.gif);-->
+<!--  background-image: linear-gradient(135deg, rgba(52, 152, 219,0.5) 0%,rgba(243, 65, 65, 0.4) 100%),url("http://stellaluo-jewelry.com/wp-content/uploads/2019/01/IC011.jpg");-->
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+
+h1 {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  font-family: "Calligraffitti";
+  font-weight: normal;
+  font-size: 5em;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+  transform: translate3d(-50%,-50%,0);
+}
+
+
+@media only screen and (max-width : 768px) {
+
+    h1 {
+        font-size: 3em;
+    }
+}
+.container2 {
+  display: inline-block;
+  cursor: pointer;
+  position:absolute;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: red;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+body {
+  font-family: "Lato", sans-serif;
+   margin: 0; padding: 0;
+
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  line-height:55px;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#main {
+
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+
+</head>
+<body>
+
+<div id="large-header" class="large-header">
+     <canvas id="demo-canvas"></canvas>
+</div>
+<div id="thediv" style="display:block">
+    <div id="mySidenav" class="sidenav">
+<!--      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
+        <a href="{% url "jewelry:collection_list" %}">Collection</a>
+        <a href="{% url "jewelry:production_list" %}">Products</a>
+        <a href="{% url "jewelry:jewelry_list" %}">Gemstones</a>
+        <a href="{% url "jewelry:sketch_list" %}">Sketches</a>
+        <a href="{% url "jewelry:about_list" %}">About</a>
+        <a href="{% url "jewelry:order_list" %}">Custom Order</a>
+        <a href="{% url "jewelry:qa_list" %}">Q&A</a>
+        <a href="{% url "jewelry:contact_list" %}">Contact</a>
+        <a href="{% url "jewelry:login" %}">My Account</a>
+    </div>
+</div>
+
+<div id="main">
+  <a href="#" id="link">
+    <div class="container2" onclick="openNav();myFunction(this);">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
+  </a>
+  <div class="container" id="co">
+  <canvas id="c"></canvas>
+    <h1>STELLA Luo</h1>
+</div>
+</div>
+
+<script type="text/javascript">
+(function() {
+
+    var width, height, largeContainer, canvas, ctx, circles, target, animateHeader = true;
+
+    // Main
+    initHeader();
+    addListeners();
+
+    function initHeader() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        target = {x: 0, y: height};
+
+        largeContainer = document.getElementById('co');
+        largeContainer.style.height = height+'px';
+
+        canvas = document.getElementById('c');
+        canvas.width = width;
+        canvas.height = height;
+        ctx = canvas.getContext('2d');
+
+        // create particles
+        circles = [];
+        for(var x = 0; x < width*0.5; x++) {
+            var c = new Circle();
+            circles.push(c);
+        }
+        animate();
+    }
+
+    // Event handling
+    function addListeners() {
+        window.addEventListener('scroll', scrollCheck);
+        window.addEventListener('resize', resize);
+    }
+
+    function scrollCheck() {
+        if(document.body.scrollTop > height) animateHeader = false;
+        else animateHeader = true;
+    }
+
+    function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        largeContainer.style.height = height+'px';
+        canvas.width = width;
+        canvas.height = height;
+    }
+
+    function animate() {
+        if(animateHeader) {
+            ctx.clearRect(0,0,width,height);
+            for(var i in circles) {
+                circles[i].draw();
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+
+    // Canvas manipulation
+    function Circle() {
+        var _this = this;
+
+        // constructor
+        (function() {
+            _this.pos = {};
+            init();
+            console.log(_this);
+        })();
+
+        function init() {
+            _this.pos.x = Math.random()*width;
+            _this.pos.y = height+Math.random()*100;
+            _this.alpha = 0.1+Math.random()*0.3;
+            _this.scale = 0.1+Math.random()*0.3;
+            _this.velocity = Math.random();
+        }
+
+        this.draw = function() {
+            if(_this.alpha <= 0) {
+                init();
+            }
+            _this.pos.y -= _this.velocity;
+            _this.alpha -= 0.0005;
+            ctx.beginPath();
+            ctx.arc(_this.pos.x, _this.pos.y, _this.scale*10, 0, 2 * Math.PI, false);
+            ctx.fillStyle = 'rgba(255,255,255,'+ _this.alpha+')';
+            ctx.fill();
+        };
+    }
+
+})();
+function myFunction(x) {
+  x.classList.toggle("change");
+}
+
+function openNav() {
+
+  if(document.getElementById("mySidenav").style.width == "0px" | document.getElementById("mySidenav").style.width == 0)
+  {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft= "250px";
+  }
+  else
+  {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+  }
+}
+</script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/TweenLite.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/EasePack.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo.js"></script>
+</body>
+</html>
